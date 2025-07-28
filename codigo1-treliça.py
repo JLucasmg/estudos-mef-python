@@ -1,3 +1,5 @@
+# EXERCÍCIO 2 - Calcule os deslocamentos e forças de reação. Considere A = 25 mm² e E = 200 GPa
+
 # Importando pandas para criar e manipular tabelas com informações importantes sobre o exercício
 import pandas as pd
 
@@ -88,4 +90,5 @@ u = sp.Matrix(cc.iloc[:, 0].tolist())
 sistema = K * u - F
 
 # Resolvendo o sistema linear
-sp.solve(sistema, (F1,F2,q3,q4,q5,F6,q7,q8))
+resultados = sp.solve(sistema, (F1,F2,q3,q4,q5,F6,q7,q8))
+sp.pprint(resultados)
