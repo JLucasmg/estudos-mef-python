@@ -1,5 +1,3 @@
-# EXERCÍCIO 2 - Calcule os deslocamentos e forças de reação. Considere A = 25 mm² e E = 200 GPa
-
 # Importando pandas para criar e manipular tabelas com informações importantes sobre o exercício
 import pandas as pd
 
