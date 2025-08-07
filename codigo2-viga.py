@@ -77,10 +77,10 @@ for i in range(df.shape[0]):
 # Definindo número máximo de graus de liberdade
 N_GDL = int(df[['GDL 1','GDL 2','GDL 3','GDL 4','GDL 5','GDL 6']].values.max())
 
-# Criando matriz de zeros para preenchimento da Matriz de Rigidez Global
+# Criando matriz de zeros para preenchimento da Matriz de Rigidez Global.
 K = sp.Matrix.zeros(N_GDL)
 
-# Estrutura para preencher a matriz global de rigidez global
+# Estrutura para preencher a matriz global de rigidez geral
 for n, row in df.iterrows(): # Faz uma iteração para cada linha da tabela como sendo uma lista
     GDL = [] # Lista vazia para preencher com os graus de liberdade relacionados na iteração
     GDL = row.iloc[3:9].tolist() # Preenchendo lista de graus de liberdade
@@ -92,6 +92,10 @@ for n, row in df.iterrows(): # Faz uma iteração para cada linha da tabela como
         for j in range(len(GDL)):
             K[GDL[i],GDL[j]] += Lista_Ke_global[n][i,j] # Preenchimento da matriz de rigidez global geral
 
-# Resolvendo sistema linear para o cálculo das reações e deslocamentos desconhecidos
+# Definindo vetores de força e deslocamento nodal para a resolução do sistema linear
+F = sp.Matrix(cc.iloc[:, 1].tolist())
+u = sp.Matrix(cc.iloc[:, 0].tolist())
+
+# Resolução do sistema linear, obtenção das forças de reação e deslocamentos nodais
 sistema = K * u - F
 sp.linsolve(sistema,(F1,F2,F3,q4,q5,q6,F7,F8,F9))
